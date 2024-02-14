@@ -1,4 +1,6 @@
+#include <GL/glew.h> // path here is the path FROM the compiler include directory
 #include <GLFW/glfw3.h>
+#include <iostream>
 
 int main(void) {
     GLFWwindow* window;
@@ -6,6 +8,9 @@ int main(void) {
     /* Initialize the library */
     if (!glfwInit())
         return -1;
+    
+    
+
 
     /* Create a windowed mode window and its OpenGL context */
     window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
@@ -16,6 +21,14 @@ int main(void) {
 
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
+
+    // must be called AFTER a context has been created
+    if (glewInit() != GLEW_OK) {
+        std::cout << "Not ok" << std::endl;
+    }
+
+    std::cout << glGetString(GL_VERSION) << std::endl;
+
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window)) {
