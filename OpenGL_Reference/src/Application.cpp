@@ -30,7 +30,7 @@ int main(void) {
     std::cout << glGetString(GL_VERSION) << std::endl;
     // Drawing a basic triangle
     //================================================================
-    float positions[6] = {
+    float positions[6] = { // each line is a vertex, xy coordinate
        -0.5f,   -0.5f,
         0.0f,    0.5f,
         0.5f,   -0.5f
@@ -41,6 +41,8 @@ int main(void) {
     glBindBuffer(GL_ARRAY_BUFFER, buffer); // bind (select) the buffer, now we are ready to work with the buffer
                 // target           size            where       what to do
     glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), positions, GL_STATIC_DRAW);
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);
+    glEnableVertexAttribArray(0); // this is needed to actually activate the previous code
     //================================================================
 
 
@@ -52,6 +54,9 @@ int main(void) {
 
         glDrawArrays(GL_TRIANGLES, 0, 3); // the draw call
         
+
+
+
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
